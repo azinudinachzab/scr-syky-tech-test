@@ -2,8 +2,8 @@ package model
 
 type Configuration struct {
 	AppAddress         string
-	EmailUsername      string
-	EmailPassword      string
+	GMailUsername      string
+	GMailPassword      string
 	DatabaseName       string
 	CronTimezone       string
 }

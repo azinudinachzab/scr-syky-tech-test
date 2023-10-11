@@ -5,7 +5,7 @@ import (
 )
 
 type (
-	Registration struct {
+	User struct {
 		ID                  uint64
 		PhoneNumber         string
 		Email               string
@@ -24,10 +24,10 @@ type (
 		Email               string    `validate:"required,email,omitempty" json:"email"`
 		IDNo                string    `validate:"required,omitempty" json:"id_no"`
 		BirthPlace          string    `validate:"required,omitempty" json:"birth_place"`
-		BirthDate           time.Time `validate:"required,omitempty" json:"birth_date"`
+		BirthDate           string    `validate:"required,omitempty" json:"birth_date"`
 		FullName            string    `validate:"required,omitempty" json:"full_name"`
-		Gender              string    `validate:"required,omitempty" json:"gender"`
-		VerificationStatus  int       `validate:"omitempty" json:"verification_status"`
+		Gender              string    `validate:"required,oneof=L P,omitempty" json:"gender"`
+		VerificationStatus  int       `validate:"oneof=0 1,omitempty" json:"verification_status"`
 	}
 )
 

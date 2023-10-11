@@ -24,7 +24,7 @@ type(
 
 func NewDelivery(dep Dependency) *Delivery {
 	return &Delivery{
-		HttpServer: httpDelivery.NewHttpServer(dep),
+		HttpServer: httpDelivery.NewHttpServer(dep.Service),
 		Cron:       cron.NewCron(dep.Service, dep.Timezone),
 	}
 }

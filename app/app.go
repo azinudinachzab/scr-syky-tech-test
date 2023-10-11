@@ -13,8 +13,6 @@ import (
 
 	"github.com/azinudinachzab/scr-syky-tech-test/delivery"
 	"github.com/azinudinachzab/scr-syky-tech-test/model"
-	"github.com/azinudinachzab/scr-syky-tech-test/pkg/clock"
-	"github.com/azinudinachzab/scr-syky-tech-test/pkg/password"
 	"github.com/azinudinachzab/scr-syky-tech-test/repository"
 	"github.com/azinudinachzab/scr-syky-tech-test/service"
 	"github.com/go-co-op/gocron"
@@ -32,10 +30,10 @@ func New() *App {
 	// init config
 	conf := model.Configuration{
 		AppAddress:         os.Getenv("APP_ADDRESS"),
-		EmailUsername:      os.Getenv("OTP_ADDRESS"),
-		EmailPassword:      os.Getenv("OTP_DURATION"),
 		DatabaseName:       os.Getenv("DB_NAME"),
 		CronTimezone:       os.Getenv("CRON_TIMEZONE"),
+		GMailUsername:      os.Getenv("GMAIL_USERNAME"),
+		GMailPassword:      os.Getenv("GMAIL_PASSWORD"),
 	}
 
 	// set std log to print filename and line number
@@ -53,18 +51,11 @@ func New() *App {
 	// validator
 	v := validator.New()
 
-	// clock
-	clk := clock.NewTime()
-
-	// password
-	hash := password.New()
 
 	// init service
 	srv := service.NewService(service.Dependency{
 		Validator: v,
 		Repo:      repo,
-		Clock:     clk,
-		Hash:      hash,
 		Conf:      conf,
 	})
 	// init http handler & cron
